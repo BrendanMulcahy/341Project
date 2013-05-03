@@ -1,6 +1,6 @@
 <?php
 
-require_once 'constants.php';
+require_once '../php/constants.php';
 
 $mysqli = new mysqli(HOST,USER,PW, DB)
 or die('Could not connect to mysql server.' );
