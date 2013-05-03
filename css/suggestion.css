@@ -279,7 +279,7 @@ a:link, a:visited, a:hover, a:active {
 /* CSS sprites */
 
 .s_symbol {
-	background-image: url(./Dota2_Alt_Tab/Images/Sprites/symbols.png?v=9);
+	background-image: url(../Images/Sprites/symbols.png?v=9);
 	background-repeat: no-repeat;
 	display: inline-block;
 	height: 32px;
@@ -290,7 +290,7 @@ a:link, a:visited, a:hover, a:active {
 .s_symbol.si_RBracket { width: 7px; background-position: -55px 0;}
 
 .s_tavern {
-	background-image: url(./Dota2_Alt_Tab/Images/Sprites/taverns.png?v=9);
+	background-image: url(../Images/Sprites/taverns.png?v=9);
 	background-repeat: no-repeat;
 	display: inline-block;
 	width: 24px;
@@ -303,7 +303,7 @@ a:link, a:visited, a:hover, a:active {
 .s_tavern.si_team_sentinel { background-position: 0 -96px;}
 
 .s_hero {
-	background-image: url(./Dota2_Alt_Tab/Images/Sprites/heroes_small.jpg?v=9);
+	background-image: url(../Images/Sprites/heroes_small.jpg?v=9);
 	background-repeat: no-repeat;
 	display: inline-block;
 	width: 64px;
@@ -409,7 +409,7 @@ a:link, a:visited, a:hover, a:active {
 .s_hero.si_Zeus { background-position: 0 -3528px;}
 
 .s_herobig {
-	background-image: url(./Dota2_Alt_Tab/Images/Sprites/heroes_big.jpg?v=9);
+	background-image: url(../Images/Sprites/heroes_big.jpg?v=9);
 	background-repeat: no-repeat;
 	display: inline-block;
 	width: 127px;
@@ -515,7 +515,7 @@ a:link, a:visited, a:hover, a:active {
 .s_herobig.si_Zeus { background-position: 0 -6958px;}
 
 .s_item {
-	background-image: url(./Dota2_Alt_Tab/Images/Sprites/items_small.jpg?v=9);
+	background-image: url(../Images/Sprites/items_small.jpg?v=9);
 	background-repeat: no-repeat;
 	display: inline-block;
 	width: 51px;
