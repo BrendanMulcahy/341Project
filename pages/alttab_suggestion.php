@@ -55,7 +55,7 @@ function printOption($optionText, $optionValue) {
 
 	function get_skills(){ 
 		var hero_val=$("#heroMenu").val(); 
-		$.post("./getBuild.php", {hero_Name : hero_val}, function(data){
+		$.post("../php/getBuild.php", {hero_Name : hero_val}, function(data){
 			if (data.length>0){ 
 				$("#build").html(data);
 			}
@@ -96,7 +96,7 @@ function printOption($optionText, $optionValue) {
 			extension[i] = $("#extensionItemMenu" + i).val();
 		}
 		
-		$.post("./insert_suggestion.php", {hero_Name : hero_val,
+		$.post("../php/insert_suggestion.php", {hero_Name : hero_val,
 											skill_1 : skills[1],
 											skill_2 : skills[2],
 											skill_3 : skills[3],
