@@ -52,12 +52,12 @@ $sql = "	INSERT INTO `dota2admin`.`guide` (`guideID`, `heroName`, `buildName`, `
 						'$extensionBuild',
 						'This is a guide made with the suggestion form!')";
 
-if ($result = $mysqli->query ( $sql ))
-	echo 'Success! ' . $heroName;
-else
-	echo 'Failure! ' . $heroName;
-	echo $mysqli->error;
-
+if ($result = $mysqli->query ( $sql )){
+	echo $mysqli->insert_id;
+}
+else{
+	echo -1;
+}
 function getInput($input) {
 	$temp = strip_tags(substr($_POST[$input],0, 100));
 	$temp = mysql_real_escape_string($temp);

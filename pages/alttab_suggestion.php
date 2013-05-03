@@ -1,3 +1,11 @@
+<?php
+
+require_once '../php/Membership.php';
+$membership = new Membership();
+
+$membership->confirm_Member();
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -12,6 +20,12 @@
 
     <form name="suggestion" id="suggestion" action="" method="get">
       <div style="width: 25em;">
+	<div name="userinputs" id="userinputs" style="width: 25em;">
+		<form>
+		Suggestion Title:<input type="text" name="title" id="title"><br>
+		Suggestion Description:<textarea rows="4" cols="50" id="description"></textarea>
+		</form>
+	</div>
         <label for="heroMenu">Select hero:</label>
         <select class="select" name="heroMenu" id="heroMenu" onchange="get_skills()" size="1">
 		<?php
@@ -25,6 +39,7 @@
 			}
 		?>
         </select>
+		
 		<div name="build" id="build" style="width: 25em;"></div>
 		<p><p><input type="submit" value="Submit Suggestion" id="suggest_button" />
 		<div name="result" id="result" style="width: 25em;"></div>
@@ -43,6 +58,7 @@ function printOption($optionText, $optionValue) {
 ?>
 
 	<script type='text/javascript'> 
+	var username=<?php echo "\"".$_SESSION['username']."\""; ?>;
 	$(document).ready(function(){ 
 		$("#build").slideUp();
 		$("#result").slideUp();
@@ -146,11 +162,13 @@ function printOption($optionText, $optionValue) {
 											extension_9 : extension[9],
 											extension_10 : extension[10]}, function(data){
 			if (data.length>0){
-				$("#result").html(data);
-				$("#suggest_button").hide();
-				$("#result").slideDown();
+				//$("#result").html(data);
+				//$("#suggest_button").hide();
+				//$("#result").slideDown();
+				$.post("../php/PushSuggestion.php", {title : $("#title").val(), description : $("#description").val(), username : username, guideid : data}, function(data){  });
 			}
 		})
+		
 	}
 	</script> 
   </body>
