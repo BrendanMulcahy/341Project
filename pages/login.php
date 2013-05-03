@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'Membership.php';
+require_once '../php/Membership.php';
 $membership = new Membership();
 
 $membership->already_Logged_In();

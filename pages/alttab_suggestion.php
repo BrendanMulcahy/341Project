@@ -4,8 +4,8 @@
   <head>
     <title>Dota 2 Alt-Tab Suggestion Form</title>
     <!--<link rel="stylesheet" type="text/css" href="common.css" /> -->
-	<link rel="stylesheet" href="suggestion.css" >
-	<script src="./jquery.js"></script>
+	<link rel="stylesheet" href="../css/suggestion.css" >
+	<script src="../js/jquery.js"></script>
   </head>
   <body>
     <h1>Dota 2 Alt-Tab Suggestion Form</h1>

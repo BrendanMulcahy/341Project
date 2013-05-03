@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Membership.php';
+require_once '../php/Membership.php';
 $membership = new Membership();
 
 $membership->confirm_Member();
