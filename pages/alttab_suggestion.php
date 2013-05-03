@@ -15,10 +15,7 @@
         <label for="heroMenu">Select hero:</label>
         <select class="select" name="heroMenu" id="heroMenu" onchange="get_skills()" size="1">
 		<?php
-			define('HOST', 'localhost');
-			define('USER', 'root');
-			define('PW', 'bman90');
-			define('DB', 'dota2admin');
+			require_once '../php/constants.php';
 		
 			$mysqli = new mysqli(HOST,USER,PW, DB);
 			$heroSQL = "SELECT heroName FROM hero";
