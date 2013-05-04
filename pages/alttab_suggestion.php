@@ -22,8 +22,10 @@ $membership->confirm_Member();
       <div style="width: 25em;">
 	<div name="userinputs" id="userinputs" style="width: 25em;">
 		<form>
-		Suggestion Title:<input type="text" name="title" id="title"><br>
-		Suggestion Description:<textarea rows="4" cols="50" id="description"></textarea>
+		<label for="title">Suggestion Title:</label>
+		<input type="text" name="title" id="title"><br>
+		<label for="description">Suggestion Description:</label>
+		<textarea rows="4" cols="50" id="description"></textarea>
 		</form>
 	</div>
         <label for="heroMenu">Select hero:</label>
@@ -86,11 +88,13 @@ function printOption($optionText, $optionValue) {
 	}
 	
 	function submit_suggestion(){
-		var hero_val=$("#heroMenu").val(); 
+		var hero_val=$("#heroMenu").val();
+		var description_val=$("#heroDescription").val();
 		var skills = new Array();
 		var starting = new Array();
 		var core = new Array();
 		var extension = new Array();
+		var tips_val=$("#heroTips").val();
 		
 		//get the skills
 		for(var i = 1; i < 19; i++) {
@@ -113,6 +117,7 @@ function printOption($optionText, $optionValue) {
 		}
 		
 		$.post("../php/insert_suggestion.php", {hero_Name : hero_val,
+											hero_Description : description_val,
 											skill_1 : skills[1],
 											skill_2 : skills[2],
 											skill_3 : skills[3],
@@ -160,7 +165,8 @@ function printOption($optionText, $optionValue) {
 											extension_7 : extension[7],
 											extension_8 : extension[8],
 											extension_9 : extension[9],
-											extension_10 : extension[10]}, function(data){
+											extension_10 : extension[10],
+											hero_Tips : tips_val}, function(data){
 			if (data.length>0){
 				//$("#result").html(data);
 				//$("#suggest_button").hide();

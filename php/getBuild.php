@@ -14,6 +14,10 @@ $skillInfo = $mysqli->query ( $skillsSQL );
 
 $string = '';
 
+$string .= "<label for=\"heroDescription\">Hero Description:</label>";
+$string .= "<textarea rows=\"4\" cols=\"50\" id=\"heroDescription\"></textarea>";	
+		
+
 list($skillQ, $skillW, $skillE, $skillR) = $skillInfo->fetch_row();
 for ($i = 1; $i < 19; $i++) {
 	$string .= "<p>";
@@ -68,6 +72,9 @@ for ($i = 1; $i < 11; $i++) {
 	}
 	$string .= "</select>";
 }
+
+$string .= "<label for=\"heroTips\">Hero Tips:</label>";
+$string .= "<textarea rows=\"4\" cols=\"50\" id=\"heroTips\"></textarea>";
 
 echo $string;
 

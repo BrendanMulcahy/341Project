@@ -7,10 +7,12 @@ or die('Could not connect to mysql server.' );
 
 //Get all the input data
 $heroName = getInput('hero_Name');
+$heroDescription = getInput('hero_Description');
 $skills = array();
 $starting = array();
 $core = array();
 $extension = array();
+$heroTips = getInput('hero_Tips');
 
 //create a map for item display name to dotaID
 $itemsMap = array();
@@ -42,15 +44,16 @@ $coreBuild = formatItems($core, $itemsMap);
 $extensionBuild = formatItems($extension, $itemsMap);
 
 //make the insert
-$sql = "	INSERT INTO `dota2admin`.`guide` (`guideID`, `heroName`, `buildName`, `skillBuild`, `starting`, `core`, `extension`, `notes`) 
+$sql = "	INSERT INTO `dota2admin`.`guide` (`guideID`, `heroName`, `description`, `buildName`, `skillBuild`, `starting`, `core`, `extension`, `tips`) 
 				VALUES (NULL,
 						'$heroName',
+						'$heroDescription',
 						'Standard',
 						'$skillBuild',
 						'$startingBuild',
 						'$coreBuild',
 						'$extensionBuild',
-						'This is a guide made with the suggestion form!')";
+						'$heroTips')";
 
 if ($result = $mysqli->query ( $sql )){
 	echo $mysqli->insert_id;
