@@ -14,6 +14,29 @@ a:link, a:visited, a:hover, a:active {
   color: inherit;
 }
 
+.uvote {
+  display: block;
+  background: url('../images/up.png');
+  width: 40px;
+  height: 25px;
+  background-position: 0px -25px;
+} 
+.dvote {
+  display: block;
+  background: url('../images/down.png');
+  width: 40px;
+  height: 25px;
+  background-position: 0px -5px; 
+} 
+
+.dvote.dn {
+  background-position: 0px -30px;
+}
+
+.uvote.up {
+  background-position: 0px +55px;
+}
+
 .hidden { display: none }
 
 .title {
