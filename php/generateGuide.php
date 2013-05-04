@@ -1,9 +1,23 @@
 <?php
 require_once '../php/constants.php';
 
+//build item map
+$mysqli = new mysqli(HOST,USER,PW, DB)
+or die('Could not connect to mysql server.' );
+
+$sql = "SElECT dotaID, displayName
+		FROM item";
+$displayInfo = $mysqli->query ( $sql );
+
+$itemMap = array();
+while(list($dotaID, $displayName) = $displayInfo->fetch_row()) {
+	$itemMap[$dotaID] = $displayName;
+}
+
 function generateGuide($guideID) {
-	$mysqli = new mysqli(HOST,USER,PW, DB)
-	or die('Could not connect to mysql server.' );
+	global $mysqli;
+	//$mysqli = new mysqli(HOST,USER,PW, DB)
+	//or die('Could not connect to mysql server.' );
 
 	$guideSQL = "SELECT `heroName`, `description`, `buildName`, `skillBuild`, `starting`, `core`, `extension`, `tips`
 				 FROM `guide`
@@ -63,6 +77,7 @@ function generateGuide($guideID) {
 	$end = strpos($starting, ',', $start);
 	while ($end !== false) {
 		$dotaID = substr($starting, $start, $end - $start);
+		//echo "Dota ID should be: " . $dotaID . ", and it is: ";
 		$output .= "<span class=\"s_item si" . substr($dotaID, 4) . "\" title=\"" . getItemDisplay($dotaID) . "\"></span>";
 		$start = $end + 1;
 		$end = strpos($starting, ',', $start);
@@ -75,6 +90,7 @@ function generateGuide($guideID) {
 	$end = strpos($core, ',', $start);
 	while ($end !== false) {
 		$dotaID = substr($core, $start, $end - $start);
+		//echo "Dota ID should be: " . $dotaID . ", and it is: ";
 		$output .= "<span class=\"s_item si" . substr($dotaID, 4) . "\" title=\"" . getItemDisplay($dotaID) . "\"></span>";
 		$start = $end + 1;
 		$end = strpos($core, ',', $start);
@@ -87,6 +103,7 @@ function generateGuide($guideID) {
 	$end = strpos($extension, ',', $start);
 	while ($end !== false) {
 		$dotaID = substr($extension, $start, $end - $start);
+		//echo "Dota ID should be: " . $dotaID . ", and it is: ";
 		$output .= "<span class=\"s_item si" . substr($dotaID, 4) . "\" title=\"" . getItemDisplay($dotaID) . "\"></span>";
 		$start = $end + 1;
 		$end = strpos($extension, ',', $start);
@@ -237,15 +254,12 @@ function getSkillName($skill, $skillQ, $skillW, $skillE, $skillR) {
 }
 
 function getItemDisplay($dotaID) {
-	$mysqli = new mysqli(HOST,USER,PW, DB)
-	or die('Could not connect to mysql server.' );
-	
-	$sql = "SElECT displayName
-			FROM item
-			WHERE dotaID = '$dotaID'
-			LIMIT 1";
-	$displayInfo = $mysqli->query ( $sql );
-	list($displayName) = $displayInfo->fetch_row();
-	
-	return $displayName;
+	global $itemMap;
+	//echo "$dotaID<br>";
+	if(isset($itemMap[$dotaID])) {
+
+		return $itemMap[$dotaID];
+	} else {
+		return 'ERROR';
+	}
 }
