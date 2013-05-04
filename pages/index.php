@@ -1,9 +1,12 @@
 <?php
-
+session_start();
 require_once '../php/Membership.php';
 $membership = new Membership();
 
-$membership->confirm_Member();
+// If the user clicks the "Log Out" link on the index page.
+if(isset($_GET['status']) && $_GET['status'] == 'loggedout') {
+	$membership->log_User_Out();
+}
 
 ?>
 
@@ -29,9 +32,27 @@ $membership->confirm_Member();
 	  </script>
 	</head>
 	<body>
-		<div align="right" id="container">
-		<?php echo $_SESSION['username'] ?>&nbsp;<a href="changePassword.php">Change Password</a>&nbsp;<a href="login.php?status=loggedout">Log Out</a>
+		<div id="textbox">
+			<div class="alignleft">
+				<?php
+					echo "<a href=\"SuggestionList.php\">Suggestions Forum</a>&nbsp;<a href=\"alttab_suggestion.php\">Submit a Suggestion</a>";
+				?>
+			</div>
+			<div class="alignright">
+				<?php
+					if(isset($_SESSION['username'])) {
+						echo "Welcome, " . $_SESSION['username'] . "!&nbsp;<a href=\"changePassword.php\">Change Password</a>&nbsp;";
+					}
+
+					if (isset($_SESSION['status']) && $_SESSION['status'] == 'loggedin') {
+						echo "<a href=\"index.php?status=loggedout\">Log Out</a>";
+					} else {
+						echo "<a href=\"login.php?target=index\">Log In</a>&nbsp;<a href=\"registration.php\">Register</a>";
+					}
+				?>
+			</div>
 		</div>
+		<div style="clear: both;"></div>
 		<h1 class="title"><a href="./#"><img src="../Images/banner.png"></a></h1>
 		<script>
 		  document.write(

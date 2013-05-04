@@ -2,7 +2,7 @@
 require_once '../php/Membership.php';
 $membership = new Membership();
 
-$membership->confirm_Member();
+$membership->confirm_Member('changePassword');
 
 // Did the user enter a password and click submit?
 if($_POST && !empty($_SESSION['username']) && !empty($_POST['oldpwd']) && !empty($_POST['newpwd']) && !empty($_POST['newpwd2'])) {

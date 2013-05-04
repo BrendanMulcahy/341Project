@@ -3,7 +3,7 @@
 require_once '../php/Membership.php';
 $membership = new Membership();
 
-$membership->confirm_Member();
+$membership->confirm_Member('suggest');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"

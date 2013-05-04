@@ -9,9 +9,23 @@ class Membership {
 		$ensure_credentials = $mysql->verify_Username_and_Pass($un, md5($pwd));
 		
 		if($ensure_credentials) {
-			$_SESSION['status'] = 'authorized';
+			session_start();
+			$_SESSION['status'] = 'loggedin';
 			$_SESSION['username'] = $un;
-			header("location: index.php");
+			
+			if(isset($_GET['target'])) {
+				if($_GET['target'] == 'suggest') {
+					header("location: alttab_suggestion.php");
+				}
+				if($_GET['target'] == 'index') {
+					header("location: index.php");
+				}
+				if($_GET['target'] == 'changePassword') {
+					header("location: changePassword.php");
+				}
+			} else {
+				header("location: index.php");
+			}
 		} else return "Please enter a correct username and password";
 		
 	} 
@@ -27,13 +41,15 @@ class Membership {
 		}
 	}
 	
-	function confirm_Member() {
+	function confirm_Member($target) {
 		session_start();
-		if($_SESSION['status'] !='authorized') header("location: login.php");
+		if($_SESSION['status'] !='loggedin') header("location: login.php?target=" . $target);
 	}
 	
 	function already_Logged_In() {
-		if(isset($_SESSION['status'])) header("location: index.php");
+		if(isset($_SESSION['status'])&& $_SESSION['status'] == 'loggedin') {
+			header("location: index.php");
+		}
 	}
 	
 	function register_user($un, $pwd, $pwd2, $email) {

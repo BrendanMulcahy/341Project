@@ -16,6 +16,13 @@ a:link, a:visited, a:hover, a:active {
   color: inherit;
 }
 
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
 .hidden { display: none }
 
 .title {
