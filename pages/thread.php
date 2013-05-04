@@ -1,5 +1,8 @@
 <?php
 require '../php/generateGuide.php';
+if(isset($_GET['id'])) {
+	$id = (int)$_GET['id']
+}
 
 ?>
 <html>
@@ -8,7 +11,7 @@ require '../php/generateGuide.php';
 </head>
 <body>
 <div class="section">
-<?php echo generateGuideWithSuggestionID(4); ?>
+<?php echo generateGuideWithSuggestionID($id); ?>
 </div>
 </body>
 </html>
