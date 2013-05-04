@@ -7,7 +7,7 @@ if ($dbh->connect_errno) {
 	exit;
 }
 
-if (!$stmt = $dbh->prepare("SELECT G.guideID, G.heroName, G.buildName, G.skillBuild, G.starting, G.core, G.extension, G.notes FROM guide G, hero H WHERE G.guideID = H.guideID")) {
+if (!$stmt = $dbh->prepare("SELECT G.guideID, G.heroName, G.description, G.buildName, G.skillBuild, G.starting, G.core, G.extension, G.tips FROM guide G, hero H WHERE G.guideID = H.guideID")) {
 	echo "Prepare failed: (" . $dbh->errno . ") " . $dbh->error;
 	exit;
 }
@@ -15,7 +15,7 @@ elseif (!$stmt->execute()) {
 	echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	exit;
 }
-elseif(!$stmt->bind_result($a, $b, $c, $d, $e, $f, $g, $h)){
+elseif(!$stmt->bind_result($a, $b, $c, $d, $e, $f, $g, $h, $i)){
 	echo "Bind Result failed: (" . $stmt->errno . ") " . $stmt->error;
 	exit;
 }
@@ -23,13 +23,14 @@ else{
 	while ($row = $stmt->fetch()) {
 		$output = json_encode(array(
 					   "guideID" => $a,
-					   "heroID" => $b,
-					   "buildName" => $c, 
-					   "skillBuild" => $d, 
-					   "starting" => $e, 
-					   "core" => $f, 
-					   "extension" => $g, 
-					   "notes" => $h
+					   "heroName" => $b,
+					   "description" => $c,
+					   "buildName" => $d, 
+					   "skillBuild" => $e, 
+					   "starting" => $f, 
+					   "core" => $g, 
+					   "extension" => $h, 
+					   "tips" => $i
 					   ));
 	  }
 }
