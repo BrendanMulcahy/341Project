@@ -30,9 +30,19 @@ $membership->confirm_Member();
 		$result=getPage($page);
 		foreach($result as $value){
 			$decode=json_decode($value,true);
-			echo $decode['title'];
+			printTitle($decode['title']);
+			printUser($decode['userName'], $decode['dateCreated']);
+			echo  $decode['upVotes'];
 		}
 		
+function printTitle($title){
+//print the title of the HTML
+echo "<h2 href=\"./SuggestionList.php?page=1\">".$title."</h2>";
+}
+function printUser($userName, $dateCreated){
+//print the username 
+echo "<h4>".$userName." - ".$dateCreated."</h4>";
+}
 				
 	?>
       </div>
