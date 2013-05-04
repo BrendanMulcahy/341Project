@@ -62,7 +62,7 @@ else{
 	echo -1;
 }
 function getInput($input) {
-	$temp = strip_tags(substr($_POST[$input],0, 100));
+	$temp = strip_tags(substr($_POST[$input],0, 1000));
 	$temp = mysql_real_escape_string($temp);
 	return $temp;
 }
