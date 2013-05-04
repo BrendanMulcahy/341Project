@@ -128,112 +128,21 @@ if(isset($_GET['status']) && $_GET['status'] == 'loggedout') {
 				</p>
 			</div>
 			<h1>Hero Guides</h1>
-			<div class="guide" id="ES">
-				<div class="guideHeader">
-					<span class="s_herobig si_ES" title="Earthshaker"></span>
-					<h2>Earthshaker</h2>
-					<div class="nav">
-						<a href="http://dota2wiki.com/wiki/Earthshaker" target="_blank">Detailed Info</a>
-						<a href="#ES">Permalink</a>
-						<a href="#">Back to top</a>
-					</div>
-				</div>
-				<div class="guideBody">
-					<div class="tip">Earthshaker is a support hero with a very long range stun and great initiation ability once he farms a Blink Dagger.</div>
-					<div class="tip">Early game, Earthshaker can either support or roam, using <span class="Q">Fissure</span> to block terrain to secure kills or save allies. Either way, stay hidden in the trees to get the best <span class="Q">Fissure</span> angles (and to leech XP).</div>
-					<div class="tip">Later in the game, try to farm a Blink Dagger. <span class="R">Echo Slam</span> deals devastating damage against clumped enemies and you can keep them stunned for a long time by chaining your skills correctly.</div>
-					<div class="tabs"><div class="tab active">
-						<h3>Skills</h3>
-					</div><div class="pane visible"><div class="paneContents">
-					<table class="skillBuild">
-						<tr>
-							<td class="tn">1</td><td class="Q">Fissure</td>
-							<td class="tn">7</td><td class="Q">Fissure</td>
-							<td class="tn">13</td><td class="W">Enchant Totem</td>
-						</tr>
-						<tr>
-							<td class="tn">2</td><td class="E">Aftershock</td>
-							<td class="tn">8</td><td class="E">Aftershock</td>
-							<td class="tn">14</td><td class="W">Enchant Totem</td>
-						</tr>
-						<tr>
-							<td class="tn">3</td><td class="Q">Fissure</td>
-							<td class="tn">9</td><td class="E">Aftershock</td>
-							<td class="tn">15</td><td class="S">Attribute Bonus</td>
-						</tr>
-						<tr>
-							<td class="tn">4</td><td class="W">Enchant Totem</td>
-							<td class="tn">10</td><td class="E">Aftershock</td>
-							<td class="tn">16</td><td class="R">Echo Slam</td>
-						</tr>
-						<tr>
-							<td class="tn">5</td><td class="Q">Fissure</td>
-							<td class="tn">11</td><td class="R">Echo Slam</td>
-							<td class="tn">17</td><td class="S">Attribute Bonus</td>
-						</tr>
-						<tr>
-							<td class="tn">6</td><td class="R">Echo Slam</td>
-							<td class="tn">12</td><td class="W">Enchant Totem</td>
-							<td class="tn">18</td><td class="S">Attribute Bonus</td>
-						</tr>
-					</table></div></div></div>
-					<div class="tabs"><div class="tab active">
-						<h3>Items</h3>
-					</div><div class="pane visible"><div class="paneContents">
-						<table class="itemBuild">
-							<tr>
-								<th>Starting</th>
-								<td>
-									<span class="s_symbol si_LBracket"></span>
-									<span class="s_item si_courier" title="Animal Courier"></span>
-									<span class="s_symbol si_Slash"></span>
-									<span class="s_item si_ward_observer" title="Observer Ward"></span>
-									<span class="s_symbol si_RBracket"></span>
-									<span class="s_item si_branches" title="Iron Branch"></span>
-									<span class="s_item si_branches" title="Iron Branch"></span>
-									<span class="s_item si_branches" title="Iron Branch"></span>
-									<span class="s_item si_tango" title="Tango"></span>
-									<span class="s_item si_tango" title="Tango"></span>
-									<span class="s_item si_clarity" title="Clarity"></span>
-									<span class="s_item si_clarity" title="Clarity"></span>
-								</td>
-							</tr>
-							<tr>
-								<th>Core</th>
-								<td>
-									<span class="s_item si_magic_wand" title="Magic Wand"></span>
-									<span class="s_item si_arcane_boots" title="Arcane Boots"></span>
-									<span class="s_item si_blink" title="Blink Dagger"></span>
-								</td>
-							</tr>
-							<tr>
-								<th>Extension</th>
-								<td>
-									<span class="s_item si_ultimate_scepter" title="Aghanim&apos;s Scepter"></span>
-									<span class="s_item si_shivas_guard" title="Shiva&apos;s Guard"></span>
-									<span class="s_item si_sheepstick" title="Scythe of Vise"></span>
-									<span class="s_item si_heart" title="Heart of Tarrasque"></span>
-								</td>
-							</tr>
-							<tr>
-								<th>Fallback</th>
-								<td>
-									<span class="s_item si_ward_observer" title="Observer Ward"></span>
-									<span class="s_item si_bottle" title="Bottle"></span>
-									<span class="s_item si_bracer" title="Bracer"></span>
-									<span class="s_item si_vitality_booster" title="Vitality Booster"></span>
-								</td>
-							</tr>
-						</table>
-					</div></div></div>
-					<div class="tabs"><div class="tab active">
-						<h3>Tips</h3>
-					</div><div class="pane visible"><div class="paneContents">
-						<div class="tip">Unit-targeting <span class="Q">Fissure</span> is a sure hit, but ground-targeting allows for longer range and finer positioning.</div>
-						<div class="tip"><span class="W">Enchant Totem</span> is only really good for triggering <span class="E">Aftershock</span>; Don&apos;t get too excited about the damage.</div>
-					</div></div></div>
-				</div>
-			</div>
+			<?php
+				require_once '../php/constants.php';
+				require '../php/generateGuide.php';
+				
+				$mysqli = new mysqli(HOST,USER,PW, DB)
+				or die('Could not connect to mysql server.' );
+				
+				$heroesSQL = "SELECT guideID
+							  FROM hero
+							  WHERE guideID IS NOT NULL";
+				$guideInfo = $mysqli->query ( $heroesSQL );
+				while(list($guideID) = $guideInfo->fetch_row()) {
+					echo generateGuide($guideID);
+				}
+			?>
 		</div>
 
 		<p class="copyright">

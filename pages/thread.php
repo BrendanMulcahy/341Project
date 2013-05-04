@@ -8,7 +8,7 @@ require '../php/generateGuide.php';
 </head>
 <body>
 <div class="section">
-<?php echo generateGuide(4); ?>
+<?php echo generateGuideWithSuggestionID(4); ?>
 </div>
 </body>
 </html>

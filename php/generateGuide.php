@@ -1,16 +1,10 @@
 <?php
 require_once '../php/constants.php';
 
-function generateGuide($suggestionID) {
+function generateGuide($guideID) {
 	$mysqli = new mysqli(HOST,USER,PW, DB)
 	or die('Could not connect to mysql server.' );
 
-	$guideIDSQL = "SELECT guideID 
-				   FROM suggestion
-				   WHERE suggestionID = '$suggestionID'";
-	$idInfo = $mysqli->query ( $guideIDSQL );
-	list($guideID) = $idInfo->fetch_row();
-	
 	$guideSQL = "SELECT `heroName`, `description`, `buildName`, `skillBuild`, `starting`, `core`, `extension`, `tips`
 				 FROM `guide`
 				 WHERE `guideID` = '$guideID'";
@@ -104,6 +98,19 @@ function generateGuide($suggestionID) {
 	$output .= "</div></div></div></div></div>";
 				
 	return $output;
+}
+
+function generateGuideWithSuggestionID($suggestionID) {
+	$mysqli = new mysqli(HOST,USER,PW, DB)
+	or die('Could not connect to mysql server.' );
+
+	$guideIDSQL = "SELECT guideID 
+				   FROM suggestion
+				   WHERE suggestionID = '$suggestionID'";
+	$idInfo = $mysqli->query ( $guideIDSQL );
+	list($guideID) = $idInfo->fetch_row();
+	
+	return generateGuide($guideID);
 }
 
 function getAbbreviation($heroName) {
