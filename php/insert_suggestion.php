@@ -1,4 +1,8 @@
 <?php
+//Used by alttab_suggestion.php
+//Creates an insert sql query based on the data
+//submitted by the used on the alttab_suggestion.php
+//Used in an Ajax call.
 
 require_once 'constants.php';
 

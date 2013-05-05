@@ -49,6 +49,8 @@ $membership->confirm_Member('suggest');
     </form>
 	
 <?php
+//Prints a properly formatted html option element given
+//a text and a value.
 function printOption($optionText, $optionValue) {
 	//$selectedHero = $_GET['heroMenu'];
 	//if ($optionValue == $selectedHero) {

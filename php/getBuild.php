@@ -1,4 +1,9 @@
 <?php
+//Used by the alttab_suggestion.php page
+//Used in an Ajax call.
+//Returns the html elements needed to construct the html forms
+// for the suggestion page.  Takes in a hero name.
+
 
 require_once '../php/constants.php';
 
