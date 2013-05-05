@@ -14,6 +14,8 @@ while(list($dotaID, $displayName) = $displayInfo->fetch_row()) {
 	$itemMap[$dotaID] = $displayName;
 }
 
+//Generates a properly formatted guide using only the guide ID
+//Creates a single HTML string which is returned and can be echo'd
 function generateGuide($guideID) {
 	global $mysqli;
 	//$mysqli = new mysqli(HOST,USER,PW, DB)
@@ -117,9 +119,11 @@ function generateGuide($guideID) {
 	return $output;
 }
 
+//Generates a guide using a suggestionID instead of a
+//Guide ID directly.  Finds the guide ID associated with
+//the suggestion and then calls the generateGuide function
 function generateGuideWithSuggestionID($suggestionID) {
-	$mysqli = new mysqli(HOST,USER,PW, DB)
-	or die('Could not connect to mysql server.' );
+	global $mysqli;
 
 	$guideIDSQL = "SELECT guideID 
 				   FROM suggestion
@@ -130,111 +134,16 @@ function generateGuideWithSuggestionID($suggestionID) {
 	return generateGuide($guideID);
 }
 
+//Returns the commonly used abbreviation for a hero
+//given that hero's name.  Uses a map and looks up the
+//value.
 function getAbbreviation($heroName) {
-	$map = array(
-				'Ancient Apparition' => "AA",
-				'Alchemist' => "Alch",
-				'Anti-mage' => "AM",
-				'Axe' => "Axe",
-				'Bane' => "Bane",
-				'Batrider' => "Bat",
-				'Beastmaster' => "Beast",
-				'Bounty Hunter' => "BH",
-				'Brewmaster' => "Brew",
-				'Broodmother' => "Brood",
-				'Bloodseeker' => "BS",
-				'Centaur Warrunner' => "Cent",
-				'Chen' => "Chen",
-				'Chaos Knight' => "CK",
-				'Clinkz' => "Clinkz",
-				'Clockwerk' => "Clock",
-				'Crystal Maiden' => "CM",
-				'Dazzle' => "Dazzle",
-				'Undying' => "Dirge",
-				'Disruptor' => "Disruptor",
-				'Dragon Knight' => "DK",
-				'Doombringer' => "Doom",
-				'Drow Ranger' => "Drow",
-				'Dark Seer' => "DS",
-				'Enchantress' => "Ench",
-				'Enigma' => "Enigma",
-				'Earthshaker' => "ES",
-				'Gyrocopter' => "Gyro",
-				'Huskar' => "Huskar",
-				'Invoker' => "Invoker",
-				'Jakiro' => "Jakiro",
-				'Juggernaut' => "Jugger",
-				'Keeper of the Light' => "KOTL",
-				'Death Prophet' => "Krob",
-				'Kunkka' => "Kunkka",
-				'Lone Druid' => "LD",
-				'Skeleton King' => "Leoric",
-				'Leshrac' => "Lesh",
-				'Lich' => "Lich",
-				'Lina' => "Lina",
-				'Lion' => "Lion",
-				'Luna' => "Luna",
-				'Lycanthrope' => "Lycan",
-				'Magnus' => "Magnus",
-				'Medusa' => "Medusa",
-				'Meepo' => "Meepo",
-				'Morphling' => "Morph",
-				'Nyx Assassin' => "NA",
-				'Naga Siren' => "Naga",
-				'Lifestealer' => "Naix",
-				'Necrolyte' => "Necro",
-				'Night Stalker' => "NS",
-				'Outworld Devourer' => "OD",
-				'Ogre Magi' => "Ogre",
-				'Omniknight' => "Omni",
-				'Phantom Assassin' => "PA",
-				'Phantom Lancer' => "PL",
-				'Mirana' => "POTM",
-				'Nature\'s Prophet' => "Prophet",
-				'Puck' => "Puck",
-				'Pudge' => "Pudge",
-				'Pugna' => "Pugna",
-				'Queen of Pain' => "QoP",
-				'Razor' => "Razor",
-				'Shadow Shaman' => "Rhasta",
-				'Riki' => "Riki",
-				'Rubick' => "Rubick",
-				'Spirit Breaker' => "SB",
-				'Shadow Demon' => "SD",
-				'Shadow Fiend' => "SF",
-				'Timbersaw' => "Shredder",
-				'Silencer' => "Silencer",
-				'Sand King' => "SK",
-				'Slardar' => "Slardar",
-				'Slark' => "Slark",
-				'Sniper' => "Sniper",
-				'Spectre' => "Spectre",
-				'Storm Spirit' => "Storm",
-				'Sven' => "Sven",
-				'Templar Assassin' => "TA",
-				'Tidehunter' => "Tide",
-				'Tinker' => "Tinker",
-				'Tiny' => "Tiny",
-				'Treant Protector' => "Treant",
-				'Troll Warlord' => "Troll",
-				'Tusk' => "Tuskarr",
-				'Ursa' => "Ursa",
-				'Venomancer' => "Veno",
-				'Viper' => "Viper",
-				'Visage' => "Visage",
-				'Faceless Void' => "Void",
-				'Vengeful Spirit' => "VS",
-				'Warlock' => "Warlock",
-				'Witch Doctor' => "WD",
-				'Weaver' => "Weaver",
-				'Io' => "Wisp",
-				'Windrunner' => "WR",
-				'Zeus' => "Zeus"
-	);
-	
-	return $map[$heroName];
+	global $heroMap;
+	return $heroMap[$heroName];
 }
 
+//Outputs the appropriate skill name based on $skill, given the
+//skill names listed in $skillQ, $skillW, ...
 function getSkillName($skill, $skillQ, $skillW, $skillE, $skillR) {
 	if ($skill === 'Q') {
 		return $skillQ;
@@ -253,6 +162,8 @@ function getSkillName($skill, $skillQ, $skillW, $skillE, $skillR) {
 	}
 }
 
+//Converts an items dotaID to the user friendly
+//display ID.  Looks up the value from the item map.
 function getItemDisplay($dotaID) {
 	global $itemMap;
 	//echo "$dotaID<br>";
@@ -263,3 +174,105 @@ function getItemDisplay($dotaID) {
 		return 'ERROR';
 	}
 }
+
+//Contains a mapping from hero name => abbreviation
+$heroMap = array(
+			'Ancient Apparition' => "AA",
+			'Alchemist' => "Alch",
+			'Anti-mage' => "AM",
+			'Axe' => "Axe",
+			'Bane' => "Bane",
+			'Batrider' => "Bat",
+			'Beastmaster' => "Beast",
+			'Bounty Hunter' => "BH",
+			'Brewmaster' => "Brew",
+			'Broodmother' => "Brood",
+			'Bloodseeker' => "BS",
+			'Centaur Warrunner' => "Cent",
+			'Chen' => "Chen",
+			'Chaos Knight' => "CK",
+			'Clinkz' => "Clinkz",
+			'Clockwerk' => "Clock",
+			'Crystal Maiden' => "CM",
+			'Dazzle' => "Dazzle",
+			'Undying' => "Dirge",
+			'Disruptor' => "Disruptor",
+			'Dragon Knight' => "DK",
+			'Doombringer' => "Doom",
+			'Drow Ranger' => "Drow",
+			'Dark Seer' => "DS",
+			'Enchantress' => "Ench",
+			'Enigma' => "Enigma",
+			'Earthshaker' => "ES",
+			'Gyrocopter' => "Gyro",
+			'Huskar' => "Huskar",
+			'Invoker' => "Invoker",
+			'Jakiro' => "Jakiro",
+			'Juggernaut' => "Jugger",
+			'Keeper of the Light' => "KOTL",
+			'Death Prophet' => "Krob",
+			'Kunkka' => "Kunkka",
+			'Lone Druid' => "LD",
+			'Skeleton King' => "Leoric",
+			'Leshrac' => "Lesh",
+			'Lich' => "Lich",
+			'Lina' => "Lina",
+			'Lion' => "Lion",
+			'Luna' => "Luna",
+			'Lycanthrope' => "Lycan",
+			'Magnus' => "Magnus",
+			'Medusa' => "Medusa",
+			'Meepo' => "Meepo",
+			'Morphling' => "Morph",
+			'Nyx Assassin' => "NA",
+			'Naga Siren' => "Naga",
+			'Lifestealer' => "Naix",
+			'Necrolyte' => "Necro",
+			'Night Stalker' => "NS",
+			'Outworld Devourer' => "OD",
+			'Ogre Magi' => "Ogre",
+			'Omniknight' => "Omni",
+			'Phantom Assassin' => "PA",
+			'Phantom Lancer' => "PL",
+			'Mirana' => "POTM",
+			'Nature\'s Prophet' => "Prophet",
+			'Puck' => "Puck",
+			'Pudge' => "Pudge",
+			'Pugna' => "Pugna",
+			'Queen of Pain' => "QoP",
+			'Razor' => "Razor",
+			'Shadow Shaman' => "Rhasta",
+			'Riki' => "Riki",
+			'Rubick' => "Rubick",
+			'Spirit Breaker' => "SB",
+			'Shadow Demon' => "SD",
+			'Shadow Fiend' => "SF",
+			'Timbersaw' => "Shredder",
+			'Silencer' => "Silencer",
+			'Sand King' => "SK",
+			'Slardar' => "Slardar",
+			'Slark' => "Slark",
+			'Sniper' => "Sniper",
+			'Spectre' => "Spectre",
+			'Storm Spirit' => "Storm",
+			'Sven' => "Sven",
+			'Templar Assassin' => "TA",
+			'Tidehunter' => "Tide",
+			'Tinker' => "Tinker",
+			'Tiny' => "Tiny",
+			'Treant Protector' => "Treant",
+			'Troll Warlord' => "Troll",
+			'Tusk' => "Tuskarr",
+			'Ursa' => "Ursa",
+			'Venomancer' => "Veno",
+			'Viper' => "Viper",
+			'Visage' => "Visage",
+			'Faceless Void' => "Void",
+			'Vengeful Spirit' => "VS",
+			'Warlock' => "Warlock",
+			'Witch Doctor' => "WD",
+			'Weaver' => "Weaver",
+			'Io' => "Wisp",
+			'Windrunner' => "WR",
+			'Zeus' => "Zeus"
+);
