@@ -1,10 +1,10 @@
 <?php
-
 require_once '../php/Membership.php';
 $membership = new Membership();
 $membership->already_Logged_In();
 $membership->confirm_Member('suggest');
 
+include '../php/navigation.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
