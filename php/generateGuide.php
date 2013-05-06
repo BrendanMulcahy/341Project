@@ -125,13 +125,22 @@ function generateGuide($guideID) {
 function generateGuideWithSuggestionID($suggestionID) {
 	global $mysqli;
 
-	$guideIDSQL = "SELECT guideID 
+	$guideIDSQL = "SELECT title, description, dateCreated, userID, guideID 
 				   FROM suggestion
 				   WHERE suggestionID = '$suggestionID'";
 	$idInfo = $mysqli->query ( $guideIDSQL );
-	list($guideID) = $idInfo->fetch_row();
+	list($title, $description, $date, $userID, $guideID) = $idInfo->fetch_row();
 	
-	return generateGuide($guideID);
+	$userSQL = "SELECT userName
+				FROM user
+				WHERE userID = '$userID'";
+	$userInfo = $mysqli->query ( $userSQL );
+	list($userName) = $userInfo->fetch_row();	
+	
+	$output = '';
+	$output .= "<h1>$title</h1><h2>$userName $date</h2><p>$description</p>";
+	
+	return $output . generateGuide($guideID);
 }
 
 //Returns the commonly used abbreviation for a hero
@@ -276,3 +285,18 @@ $heroMap = array(
 			'Windrunner' => "WR",
 			'Zeus' => "Zeus"
 );
+
+function findPosts($id) {
+	global $mysqli;
+	$postSQL = "SELECT userName, dateCreated, comment
+				FROM post
+				WHERE suggestionID = '$id'";
+	$postInfo = $mysqli->query ( $postSQL );
+	
+	$output = '';
+	while(list($userName, $dateCreated, $comment) = $postInfo->fetch_row()) {
+		$output .= "<h2>$userName $dateCreated</h2><p>$comment</p>";
+	}
+	
+	return $output;
+}
