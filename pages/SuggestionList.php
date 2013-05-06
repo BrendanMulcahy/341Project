@@ -2,7 +2,7 @@
 require_once '../php/Membership.php';
 $membership = new Membership();
 $membership->already_Logged_In();
-$membership->confirm_Member('suggest');
+$membership->confirm_Member('forum');
 
 include '../php/navigation.php';
 ?>

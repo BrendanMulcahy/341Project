@@ -15,6 +15,7 @@ if(isset($_GET['id'])) {
 <html>
 <head>
 	<link rel="stylesheet" href="../css/guide.css?v=9" >
+	<script src="../js/jquery.js"></script>
 </head>
 <body>
 <div class="section">

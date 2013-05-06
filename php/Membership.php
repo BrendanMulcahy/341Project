@@ -14,6 +14,9 @@ class Membership {
 			$_SESSION['username'] = $un;
 			
 			if(isset($_GET['target'])) {
+				if($_GET['target'] == 'forum') {
+					header("location: SuggestionList.php");
+				}
 				if($_GET['target'] == 'suggest') {
 					header("location: alttab_suggestion.php");
 				}
@@ -35,10 +38,12 @@ class Membership {
 			unset($_SESSION['status']);
 			unset($_SESSION['username']);
 			
-			if(isset($_COOKIE[session_name()])) 
+			if(isset($_COOKIE[session_name()])) {
 				setcookie(session_name(), '', time() - 1000);
 				session_destroy();
+			}
 		}
+		header("location: index.php");
 	}
 	
 	function confirm_Member($target) {
