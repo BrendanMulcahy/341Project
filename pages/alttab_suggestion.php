@@ -4,12 +4,9 @@ require_once '../php/Membership.php';
 $membership = new Membership();
 
 $membership->confirm_Member('suggest');
-
+include '../php/navigation.php';
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
+
     <title>Dota 2 Alt-Tab Suggestion Form</title>
     <!--<link rel="stylesheet" type="text/css" href="common.css" /> -->
 	<link rel="stylesheet" href="../css/suggestion.css" >
