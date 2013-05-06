@@ -24,6 +24,9 @@ include '../php/navigation.php';
 		include("../php/GetSuggestions.php");
 		if(isset($_GET['page'])){
 			$page=$_GET['page'];
+			if($page<1){
+				header("location: SuggestionList.php?page=1");
+			}
 		}else{
 			$page=1;
 		}
@@ -36,12 +39,10 @@ include '../php/navigation.php';
 
 		foreach($result as $value){
 			$decode=json_decode($value,true);
-
-			printTitle($decode['title'], $decode['upVotes'], $decode['suggestionID'], $decode['userName'], $decode['dateCreated'], $decode['vote']);
 			
+			printTitle($decode['title'], $decode['upVotes'], $decode['suggestionID'], $decode['userName'], $decode['dateCreated'], $decode['vote']);	
 			
 		}
-		
 function printTitle($title, $upvote, $index, $userName, $dateCreated, $userVote){
 //print the title of the HTML
 
@@ -154,5 +155,8 @@ echo "')\"></span>
 	}
 	
 	</script>
+	<a href="SuggestionList.php?page=<?php echo $page-1; ?>">previous</a>
+	<a href="SuggestionList.php?page=<?php echo $page+1; ?>">next</a>
+
   </body>
 </html>
