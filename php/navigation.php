@@ -41,5 +41,5 @@ echo "<head>
 			</div>
 		</div>
 		<div style=\"clear: both;\"></div>
-		<h1 class=\"title\"><a href=\"./#\"><img src=\"../Images/banner.png\"></a></h1>";
+		<h1 class=\"title\"><a href=\"./#\"><img src=\"../images/banner.png\"></a></h1>";
 ?>
